@@ -30,7 +30,10 @@ public class WineController {
         this.assembler = assembler;
     }
 
-    @GetMapping("/wine")
+    @GetMapping("/wine/")
+    public String index(){
+        return "Hola como estas";
+    }
     CollectionModel<EntityModel<Wine>> all() {
         List<EntityModel<Wine>> wines = repository.findAll().stream()
                 .map(assembler::toModel) //
