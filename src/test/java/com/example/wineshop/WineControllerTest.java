@@ -120,7 +120,7 @@ class WineControllerTest {
     void createWine() {
 
         Wine wine = new Wine();
-        wine.setName("Ribera del Duero");
+        wine.setName("TAjero Pequeño");
         wine.setYear("1500");
         wine.setNum_reviews(5);
         wine.setRating(5.3f);
@@ -137,7 +137,7 @@ class WineControllerTest {
                 .exchange()//recupera la respuesta
                 .expectStatus().is2xxSuccessful()//
                 .expectBody()
-                .jsonPath("$.name").isEqualTo("Ribera del Duero") //nombre del primer vino
+                .jsonPath("$.name").isEqualTo("Tajero Pequeño") //nombre del primer vino
                 .jsonPath("$.year").isEqualTo("1500") //año
                 .jsonPath("$.rating").isEqualTo("5.3") //rating
                 .jsonPath("$.num_reviews").isEqualTo(5) //num_reviews

@@ -3,8 +3,14 @@ package com.example.wineshop;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.hateoas.server.core.Relation;
 import org.springframework.lang.NonNull;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 
@@ -12,29 +18,54 @@ import java.util.Objects;
 @Table(name = "wine")
 public class Wine {
 
+    //@Validated
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     @NonNull
     private  Long id;
+
+
     private int winery_id;
+
+    //@NotNull
+    //@NotBlank
     private String name;
+
+  //@NotNull
+  //@NotBlank
     private String year;
+
+   // @NotNull
+   // @Min(0)
     private int num_reviews;
 
+   // @Min(0)
     private float rating;
 
+   // @Min(0)
     private int region_id;
+
+
     private double price;
 
     private int type_id;
+
+   // @Min(0)
+    //@Max(5)
     private String body;
+
+    //@Min(0)
+    //@Max(5)
     private String acidity;
 
 
 
-    Wine(){}
+  //  @Valid
+   Wine(){}
 
+   // @Valid
     public Wine(Long id, int winery_id, String name, String year, int num_reviews, float rating, int region_id, double price, int type_id, String body, String acidity) {
         this.id = id;
         this.winery_id = winery_id;
@@ -68,11 +99,20 @@ public class Wine {
         this.winery_id = winery_id;
     }
 
-    public String getName() {
+    public String getName(){
+
+
         return name;
     }
 
     public void setName(String name) {
+       /* if(name == ""){
+
+
+            System.out.println("El valor no puede estar vacio");
+
+
+        }*/
         this.name = name;
     }
 

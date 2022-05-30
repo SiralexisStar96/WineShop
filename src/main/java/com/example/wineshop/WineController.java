@@ -1,25 +1,29 @@
 package com.example.wineshop;
 
-import java.util.Collection;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
+@RequestMapping("/wine")
 public class WineController {
 
     private final WineRepository repository;
@@ -30,7 +34,9 @@ public class WineController {
         this.assembler = assembler;
     }
 
-    @GetMapping("/wine/")
+
+
+    @GetMapping("/wine")
     public String index(){
         return "Hola como estas";
     }
@@ -43,13 +49,22 @@ public class WineController {
     }
 
     @PostMapping("/wine")
-    ResponseEntity<?> newWine(@RequestBody Wine newWine) {
 
-        EntityModel<Wine> entityModel = assembler.toModel(repository.save(newWine));
+    ResponseEntity<?> newWine(@Valid @RequestBody Wine newWine /*,CopyWine copyWine*/) {
+/*
+        Wine newWine = new Wine();
+        newWine.setName(copyWine.getName());
+        newWine.setRating(copyWine.getRating());
+        newWine.setAcidity(copyWine.getAcidity());
 
-        return ResponseEntity //
-                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
-                .body(entityModel);
+        return new ResponseEntity<Wine>(newWine, HttpStatus.OK);
+*/
+         EntityModel < Wine > entityModel = assembler.toModel(repository.save(newWine));
+
+            return ResponseEntity //
+                    .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
+                    .body(entityModel);
+
     }
 
 
