@@ -1,5 +1,6 @@
 package com.example.wineshop;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -45,8 +46,7 @@ class WineryController {
                 .body(entityModel);
     }
 
-    // Single item
-
+    //Single item
     @GetMapping("/winery/{id}")
     EntityModel<Winery> one(@PathVariable Long id) {
 

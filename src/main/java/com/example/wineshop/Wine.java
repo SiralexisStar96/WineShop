@@ -18,7 +18,6 @@ import java.util.Objects;
 @Table(name = "wine")
 public class Wine {
 
-    //@Validated
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,46 +25,42 @@ public class Wine {
     @NonNull
     private  Long id;
 
-
     private int winery_id;
 
-    //@NotNull
-    //@NotBlank
+    @NotNull
+    @NotBlank
     private String name;
 
-  //@NotNull
-  //@NotBlank
+    @NotNull
+    @NotBlank
     private String year;
 
-   // @NotNull
-   // @Min(0)
+    @NotNull
+    @Min(0)
     private int num_reviews;
 
-   // @Min(0)
+    @Min(0)
+    @Max(5)
     private float rating;
 
-   // @Min(0)
     private int region_id;
 
-
+    @Min(0)
     private double price;
 
     private int type_id;
 
-   // @Min(0)
-    //@Max(5)
+    @Min(1)
+    @Max(5)
     private String body;
 
-    //@Min(0)
-    //@Max(5)
+    @Min(1)
+    @Max(5)
     private String acidity;
 
 
-
-  //  @Valid
    Wine(){}
 
-   // @Valid
     public Wine(Long id, int winery_id, String name, String year, int num_reviews, float rating, int region_id, double price, int type_id, String body, String acidity) {
         this.id = id;
         this.winery_id = winery_id;
@@ -78,8 +73,6 @@ public class Wine {
         this.type_id = type_id;
         this.body = body;
         this.acidity = acidity;
-
-
     }
 
     public Long getId() {
